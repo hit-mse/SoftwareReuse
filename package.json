@@ -1,0 +1,24 @@
+{
+  "name": "softwarereuse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd stock-master-backend && node server.js \" \"cd stock-master-front && ng serve\"",
+    "postinstall": "node install.js",
+    "install:dependencies": "node install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hit-mse/SoftwareReuse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hit-mse/SoftwareReuse/issues"
+  },
+  "homepage": "https://github.com/hit-mse/SoftwareReuse#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
