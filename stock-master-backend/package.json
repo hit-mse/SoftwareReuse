@@ -1,0 +1,23 @@
+{
+  "name": "stock-master-backend",
+  "version": "1.0.0",
+  "description": "Software reuse project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hit-mse/SoftwareReuse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hit-mse/SoftwareReuse/issues"
+  },
+  "homepage": "https://github.com/hit-mse/SoftwareReuse#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
