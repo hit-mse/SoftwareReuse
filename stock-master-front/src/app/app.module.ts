@@ -16,6 +16,6 @@ import { LoginStoreService } from './login-store.service';
     BrowserModule
   ],
   providers: [LoginStoreService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, LoginComponent]
 })
 export class AppModule { }
