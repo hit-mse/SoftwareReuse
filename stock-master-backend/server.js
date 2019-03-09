@@ -14,15 +14,13 @@ app.use(cors());
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/db' ,{ useNewUrlParser: true }).then(() => {
-  console.log("Connected")
-  mongoose.connection.dropCollection('user', () => {
-    console.log("Deleted")
+  mongoose.connection.dropCollection('users', () => {
     const testUser = new User({
       username: "testuser",
       password: "test",
-      money: 500,
+      money: 500000,
       stocks: {
-        google: 5
+        BABA: 5
       }
     })
     testUser.save((err, user)=>{

@@ -72,6 +72,18 @@ exports.searchStock = (searchterm) => {
     })
 }
 
+exports.getPrice = (symbol) => {
+    return new Promise((res, err) => {
+        alpha.data.intraday(symbol, 'compact','json','30min').then(data => {
+            var timeSeriesKey = "Time Series (30min)";
+            var test = formatData(data, timeSeriesKey, 1);
+            console.log(test);
+            res(test.prices[0]);
+        });
+    });
+}
+
+
 const formatData = (data, timeSeriesKey, points) => {
     var timeSeries = data[timeSeriesKey];
     var timestamps = _.keys(timeSeries).slice(0,points);

@@ -15,7 +15,7 @@ var UserSchema = new Schema({
       type: Number,
   },
   stocks:{
-    type:Map,
+    type: Object,
     of: Number
   }
 });
