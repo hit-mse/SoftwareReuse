@@ -38,6 +38,24 @@
     });
  }
 
+ exports.fetchStockMonthly = (stock) => {
+    return new Promise((res, err) => {
+        alpha.data.weekly(stock).then(data => {
+            var timeSeriesKey = "Time Series (Daily)";
+            res(formatData(data, timeSeriesKey, 30));
+        });
+    });
+ }
+
+ exports.fetchStockYearly = (stock) => {
+    return new Promise((res, err) => {
+        alpha.data.weekly(stock).then(data => {
+            var timeSeriesKey = "Weekly Time Series";
+            res(formatData(data, timeSeriesKey, 52));
+        });
+    });
+ }
+
 
 exports.searchStock = (searchterm) => {
     return new Promise((res, err) => {
@@ -49,7 +67,7 @@ exports.searchStock = (searchterm) => {
             }
           }).then(reply =>  reply.json())
           .then(reply => {
-                res(reply);
+          res(formatCompanyList(reply));
           });
     })
 }
@@ -65,4 +83,16 @@ const formatData = (data, timeSeriesKey, points) => {
         prices,
         timestamps,
     };
+}
+
+const formatCompanyList = (data) => {
+    var bestMatches = data["bestMatches"];
+
+    return bestMatches.map(element => {
+        return {
+            symbol: element['1. symbol'],
+            name: element['2. name']
+        }
+    });
+
 }

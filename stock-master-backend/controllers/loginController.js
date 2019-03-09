@@ -1,6 +1,6 @@
 'use strict';
 
-
+var _= require('underscore');
 
 var mongoose = require('mongoose'),
   User = mongoose.model('user');
@@ -9,18 +9,15 @@ const {authenticate} = require('./controllerHelper')
 
 
 exports.get = function(req, res) {
-
-    res.json("loggin")
-  
-  
+  res.json("login")  
 };
 
 exports.login = function(req, res) {
   authenticate(req.body.username, req.body.password).then((authenticated)=>{
-    console.log("HEJHEJ" + authenticated)
     if(authenticated){
-      console.log("INNE")
-      res.status(200).send(authenticated)
+       User.findOne({username}).then(user => {
+        res.status(200).send(_.omit(user, 'password'))
+       })
     }else{
       res.status(401).send(authenticated)
     }

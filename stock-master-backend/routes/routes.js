@@ -7,6 +7,7 @@ module.exports = function(app) {
   app.route('/login')
     .get(loginController.get)
     .post(loginController.login);
+
   app.route('/buy')
     .get(transactionController.get)
     .post(transactionController.buy);
@@ -18,4 +19,11 @@ module.exports = function(app) {
    app.route('/stock')
     .get(stockController.get)
     .post(stockController.getStock);
+
+    app.route('/search')
+    .get(stockController.get)
+    .post(stockController.searchStocks);
+  
+
+
 };
