@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/hit-mse/SoftwareReuse#readme",
   "dependencies": {
+    "alphavantage": "^1.2.0",
     "express": "^4.16.4",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.4.17"
+    "mongoose": "^5.4.17",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
