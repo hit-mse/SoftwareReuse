@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatToolbarModule} from '@angular/material';
-
+import { LoginStoreService } from '../login-store.service';
 
 @Component({
   selector: 'app-main',
@@ -9,7 +8,7 @@ import {MatToolbarModule} from '@angular/material';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private LoginStoreService: LoginStoreService) { }
 
   ngOnInit() {
   }
