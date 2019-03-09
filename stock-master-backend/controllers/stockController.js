@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 const {fetchStockDaily,fetchStockWeekly, fetchStockMonthly,searchStock} = require('../stockAPI/api')
 
 exports.get = function(req, res) {
+  fetchStockDaily("MSFT");
   res.json("stockAPI endpoint");
 };
 
@@ -19,9 +20,8 @@ exports.getStock = function(req, res) {
     else if(span === "month"){
       promise = fetchStockMonthly(stockname);
     }
-
     promise.then((data)=>{
-      
+      res.json(data)
     })
     .catch();
 
