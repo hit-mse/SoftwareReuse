@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/hit-mse/SoftwareReuse#readme",
   "dependencies": {
+    "@angular/animations": "^7.2.8",
+    "@angular/cdk": "^7.3.3",
+    "@angular/material": "^7.3.3",
     "concurrently": "^4.1.0"
   }
 }
