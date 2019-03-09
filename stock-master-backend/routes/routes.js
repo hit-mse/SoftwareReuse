@@ -4,7 +4,6 @@ module.exports = function(app) {
   var stockController = require('../controllers/stockController.js');
 
 
-  // todoList Routes
   app.route('/login')
     .get(loginController.get)
     .post(loginController.login);
