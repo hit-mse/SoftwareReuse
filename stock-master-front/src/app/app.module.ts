@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { LoginStoreService } from './login-store.service';
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -13,7 +16,8 @@ import { LoginStoreService } from './login-store.service';
     MainComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [LoginStoreService],
   bootstrap: [AppComponent, LoginComponent]

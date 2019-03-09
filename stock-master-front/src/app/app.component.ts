@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginStoreService } from './login-store.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  isLoggedIn=false;
+  constructor(
+    private LoginStoreService: LoginStoreService,
+  ) {
+
+    LoginStoreService.isUserLoggedIn.subscribe(isLoggedIn => {
+      this.isLoggedIn=isLoggedIn;
+    })
+  }
+
+
+
 }
