@@ -25,8 +25,6 @@ import {MatToolbarModule} from '@angular/material';
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule
-    
-
   ],
   providers: [LoginStoreService],
   bootstrap: [AppComponent, LoginComponent]
