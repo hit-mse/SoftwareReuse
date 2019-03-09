@@ -1,12 +1,20 @@
+<div>
+
+    <div>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Input stock:" value="" [(ngModel)]="currentStock">
+        </mat-form-field>
+        <button mat-raised-button (click)="queryStock()" style="margin:6px;">search</button>
+    </div>
+    <mat-radio-group class="example-radio-group" [(ngModel)]="currentTimespan">
+        <mat-radio-button class="example-radio-button" *ngFor="let timespan of timespans" [value]="timespan">
+            {{timespan}}
+        </mat-radio-button>
+    </mat-radio-group>
+
+</div>
 
 <div>
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Input stock:" value="" [(ngModel)]="currentStock">
-      </mat-form-field>
-      <button mat-raised-button (click)="queryStock()" style="margin:6px;">search</button>
+    <canvas #lineChart>{{ chart }}</canvas>
+
 </div>
-<mat-radio-group class="example-radio-group" [(ngModel)]="currentTimespan">
-    <mat-radio-button class="example-radio-button" *ngFor="let timespan of timespans" [value]="timespan">
-      {{timespan}}
-    </mat-radio-button>
-</mat-radio-group>

@@ -1,25 +1,25 @@
-<mat-toolbar style="display:flex" color="primary">
-<mat-toolbar-row>
+<mat-toolbar class="toolbar" style="display:flex" color="primary">
+  <mat-toolbar-row>
     <span>Stöck Mäster</span>
     <span class="spacer"></span>
     <div>
-      <button mat-raised-button>Sign out</button>
+      <button mat-raised-button (click)="LoginStoreService.logout()">Sign out</button>
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row>
       <span class="spacer"></span>
       <div>
-        <h4>Signed in as: {{LoginStoreService.username}}</h4>
+        <h4>Signed in as: {{LoginStoreService.user.username}}</h4>
       </div>
-      <div>
-          <h4>Account balance:</h4>
+      <div style="margin-left: 20px">
+          <h4>Account balance: {{LoginStoreService.user.money}}</h4>
       </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-card class="mainCard">
   <mat-card-header>
     <mat-card-title>
-    stöckgraph
+    Stocks
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -31,7 +31,13 @@
 <mat-card class="mainCard">
     <mat-card-header>
       <mat-card-title>
-      portfolio
+      My portfolio
       </mat-card-title>
     </mat-card-header>
+    <mat-card-content>
+        <app-portfolio>
+    
+        </app-portfolio>
+      </mat-card-content>
+
   </mat-card>
