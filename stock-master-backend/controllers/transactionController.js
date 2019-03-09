@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('user');
 
 const {authenticate} = require('./controllerHelper')
 

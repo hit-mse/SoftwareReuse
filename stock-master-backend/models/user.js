@@ -13,8 +13,13 @@ var UserSchema = new Schema({
   },
   money:{
       type: Number,
+  },
+  stocks:{
+    type:Map,
+    of: Number
   }
 });
 
 
-module.exports = mongoose.model('User', UserSchema);
+
+module.exports = mongoose.model('user', UserSchema);
