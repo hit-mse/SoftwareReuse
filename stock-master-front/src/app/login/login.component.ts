@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
       console.log("error")
     })
     // this.LoginStoreService.login(this.username,this.password)
-    console.log(this.username)
-    console.log(this.password)
   }
   changeView() {
     this.createAccountView=!this.createAccountView;

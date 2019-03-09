@@ -15,7 +15,7 @@ exports.get = function(req, res) {
 exports.login = function(req, res) {
   authenticate(req.body.username, req.body.password).then((authenticated)=>{
     if(authenticated){
-       User.findOne({username}).then(user => {
+       User.findOne({username: req.body.username}).then(user => {
         res.status(200).send(_.omit(user, 'password'))
        })
     }else{
