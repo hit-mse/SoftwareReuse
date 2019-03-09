@@ -27,12 +27,18 @@ mongoose.connect('mongodb://localhost:27017/db' ,{ useNewUrlParser: true }).then
     });
   })
 }); 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+
+
+var routes = require('./routes/routes.js'); //importing route
+routes(app); //register the route
 
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -47,13 +53,7 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
-
-
-var routes = require('./routes/routes.js'); //importing route
-routes(app); //register the route
 
 
 var server = app.listen(port);

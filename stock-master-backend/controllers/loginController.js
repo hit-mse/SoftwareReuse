@@ -17,7 +17,13 @@ exports.get = function(req, res) {
 
 exports.login = function(req, res) {
   authenticate(req.body.username, req.body.password).then((authenticated)=>{
-    res.json({authenticated});
+    console.log("HEJHEJ" + authenticated)
+    if(authenticated){
+      console.log("INNE")
+      res.status(200).send(authenticated)
+    }else{
+      res.status(401).send(authenticated)
+    }
   });  
 };
 
