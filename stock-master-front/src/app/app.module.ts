@@ -7,7 +7,7 @@ import { MainComponent } from './main/main.component';
 import { LoginStoreService } from './login-store.service';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material';
+import {MatToolbarModule, MatButtonModule, MatCardModule} from '@angular/material';
 
 
 
@@ -24,7 +24,9 @@ import {MatToolbarModule} from '@angular/material';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [LoginStoreService],
   bootstrap: [AppComponent, LoginComponent]

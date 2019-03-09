@@ -1,0 +1,11 @@
+.spacer {
+flex: 1 1 auto;
+}
+
+h4{
+    font-size: 0.7em;
+}
+
+.mainCard {
+    margin: 40px;
+}
