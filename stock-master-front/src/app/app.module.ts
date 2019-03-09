@@ -7,8 +7,9 @@ import { MainComponent } from './main/main.component';
 import { LoginStoreService } from './login-store.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatCardModule} from '@angular/material';
-import { HttpClientModule } from '@angular/common/http'
+import { MatToolbarModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule} from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { StockviewComponent } from './stockview/stockview.component'
 
 
 
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http'
     AppComponent,
     LoginComponent,
     MainComponent,
+    StockviewComponent,
     
   ],
   imports: [
@@ -27,7 +29,10 @@ import { HttpClientModule } from '@angular/common/http'
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule
   ],
   providers: [LoginStoreService],
   bootstrap: [AppComponent, LoginComponent]
