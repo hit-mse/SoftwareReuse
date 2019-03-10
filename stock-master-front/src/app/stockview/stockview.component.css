@@ -40,6 +40,6 @@
   }
 
   .chart {
-    max-width: 900px;
-    align-content: center;
+    width: 60%;
+    align-content: left;
   }

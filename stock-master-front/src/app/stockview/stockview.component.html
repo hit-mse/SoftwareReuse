@@ -13,7 +13,24 @@
 
 </div>
 
-<h2 class="current-stock" style="display:block;">{{queriedStock}}</h2>
-<div style="display:flex; flex-direction:column; width:100%; height: 100%; align-items:center; justify-content:center;">
-  <canvas #lineChart class="chart">{{ chart }}</canvas>
+<div style="display:flex;  flex-direction:row; flex-wrap: wrap; width:100%; height: 100%; align-items:left; justify-content:left;">
+  <div class="chart" >
+      <h2 class="current-stock" style="display:block; padding-left: 10%;">Showing stock: {{queriedStock}}</h2>
+      <canvas #lineChart >{{ chart }}</canvas>
+  </div>
+  <div style=" width: 25%; padding: 20px"  >
+    <h2>{{currentPrice}}</h2>
+    <div class="trend" [ngStyle]="trendStyle">
+      {{currentTrend}}
+    </div>
+    <div>
+      <form >
+          <mat-form-field >
+            <input matInput placeholder="Stock" value="0" input type="number">
+          </mat-form-field>
+      </form>
+      <button mat-raised-button style="margin:10px;">Buy</button>
+      <button mat-raised-button>Sell</button>
+    </div>
+  </div>
 </div>
