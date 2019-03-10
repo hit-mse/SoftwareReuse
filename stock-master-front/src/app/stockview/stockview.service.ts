@@ -15,12 +15,17 @@ export class StockviewService {
     return this.http.post('http://localhost:8081/stock',body)
   }
 
-  buyStock(stockname, amount):Observable<any>  {
-    let body = {stockname, amount}
+  buyStock(stockname, shares, username, password):Observable<any>  {
+    let body = {stockname, shares, username, password}
+    console.log("HAAAAJ");
+    
+    console.log(body);
+    
     return this.http.post('http://localhost:8081/buy',body)
   }
-  sellStock(stockname, amount):Observable<any>  {
-    let body = {stockname, amount}
+
+  sellStock(stockname, shares, username, password):Observable<any>  {
+    let body = {stockname, shares, username,password}
     return this.http.post('http://localhost:8081/sell',body)
   }
 }

@@ -29,8 +29,7 @@ export class LoginComponent implements OnInit {
   doLogin() {
 
     this.LoginService.login(this.username,this.password).subscribe(data => {
-      console.log(data)
-      this.LoginStoreService.login(data)
+      this.LoginStoreService.login(data, this.password)
     },error=> {
       console.log("error")
     })

@@ -24,13 +24,11 @@
       {{currentTrend}}
     </div>
     <div>
-      <form >
           <mat-form-field >
-            <input matInput placeholder="Stock" value="0" input type="number">
+            <input matInput placeholder="Stock" value="0" [(ngModel)]="numberOfShares" input type="number">
           </mat-form-field>
-      </form>
-      <button mat-raised-button style="margin:10px;">Buy</button>
-      <button mat-raised-button>Sell</button>
+      <button mat-raised-button (click)="buyStock()" style="margin:10px;">Buy</button>
+      <button mat-raised-button (click)="sellStock()">Sell</button>
     </div>
   </div>
 </div>
