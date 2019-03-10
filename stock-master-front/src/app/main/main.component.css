@@ -27,3 +27,7 @@ h4{
     margin: 0;
     font-weight: 200;
 }
+
+.mat-card-content {
+    margin: 15px;
+}
