@@ -35,6 +35,7 @@ exports.buy = function(req, res) {
        Promise.all([promise1, promise2]).then((promises) => {
          const user = promises[0];
          const price = promises[1] * req.body.shares;
+         const stockname = req.body.stockname.toUpperCase();
          
          if(user.money < price) {
            console.log(`User ${req.body.username} can't afford ${req.body.shares} shares`);
@@ -44,11 +45,11 @@ exports.buy = function(req, res) {
           const balace = user.money - price;
 
           user.money = balace;
-          if (!user.stocks[req.body.stockname]) user.stocks[req.body.stockname] = 0;
+          if (!user.stocks[stockname]) user.stocks[stockname] = 0;
 
-          user.stocks[req.body.stockname] = user.stocks[req.body.stockname] + req.body.shares;
+          user.stocks[stockname] = user.stocks[stockname] + req.body.shares;
           User.findOneAndUpdate({username: req.body.username}, { $set: user }).then(user => {
-            console.log(`${req.body.username} successfully bought ${req.body.shares} of ${req.body.stockname} for ${price}`);
+            console.log(`${req.body.username} successfully bought ${req.body.shares} of ${stockname} for ${price}`);
             res.status(200).send(true);
           });
 
@@ -72,34 +73,26 @@ exports.sell = function(req, res) {
       Promise.all([promise1, promise2]).then((promises) => {
         const user = promises[0];
         const reqStockPrice = promises[1] * req.body.shares;
+        const stockname = req.body.stockname.toUpperCase();
 
         if (user.money < reqStockPrice){
           res.status(401).send(false);
           return;
         }
 
-        if (user.stocks[req.body.stockname] - req.body.shares < 0 ){
+        if (user.stocks[stockname] - req.body.shares < 0 ){
           console.log('Cant sell more stocks than you own');
           res.status(401).send(false);
           return;
         }
 
-        const sharesLeft = user.stocks[req.body.stockname] - req.body.shares;
+        const sharesLeft = user.stocks[stockname] - req.body.shares;
 
-        user.stocks[req.body.stockname] = sharesLeft;
+        user.stocks[stockname] = sharesLeft;
         user.money = user.money + reqStockPrice;
 
-        // if (sharesLeft === 0){
-        //   delete user.stocks[req.body.stockname];
-        //   console.log('user.stocks: ', user.stocks);
-        //   if (user.stocks){
-        //     console.log('updated');
-        //     user.stocks = {};
-        //   }
-        // }
-
         User.findOneAndUpdate({username: req.body.username}, { $set: user }).then((user) => {
-          console.log(`${req.body.username} successfully sold ${req.body.shares} of ${req.body.stockname} for ${reqStockPrice}`);
+          console.log(`${req.body.username} successfully sold ${req.body.shares} of ${stockname} for ${reqStockPrice}`);
           res.status(200).send(true);
         });
 
