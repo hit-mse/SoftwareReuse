@@ -20,10 +20,22 @@ mongoose.connect('mongodb://localhost:27017/db' ,{ useNewUrlParser: true }).then
       password: "test",
       money: 500000,
       stocks: {
-        BABA: 5
+        BABA: 5,
+        GOOGL: 1
+      }
+    })
+    const testUser2 = new User({
+      username: "oscar",
+      password: "test",
+      money: 1000,
+      stocks: {
+        GOOGL: 5
       }
     })
     testUser.save((err, user)=>{
+      console.log(`Saved user ${user}`)
+    });
+    testUser2.save((err, user)=>{
       console.log(`Saved user ${user}`)
     });
   })
