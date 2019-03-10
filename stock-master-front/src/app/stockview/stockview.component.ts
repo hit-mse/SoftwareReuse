@@ -60,7 +60,11 @@ export class StockviewComponent implements OnInit {
   }
 
   sellStock(){
-
+    this.StockviewService.sellStock(this.queriedStock,this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
+      this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe( user => {
+        this.LoginStoreService.login(user, this.LoginStoreService.password);
+      })
+    })
   }
 
   createTrend(data){
