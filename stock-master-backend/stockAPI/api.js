@@ -40,7 +40,7 @@
 
  exports.fetchStockMonthly = (stock) => {
     return new Promise((res, err) => {
-        alpha.data.weekly(stock).then(data => {
+        alpha.data.daily(stock).then(data => {
             var timeSeriesKey = "Time Series (Daily)";
             res(formatData(data, timeSeriesKey, 30));
         });
