@@ -19,7 +19,6 @@ export class LoginStoreService {
   }
 
   login(user, password)  {
-    console.log("User logged in:");
     this.user.username = user.username;
     this.password = password;
     this.user.money = user.money;

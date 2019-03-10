@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginStoreService } from '../login-store.service';
 import { LoginService } from './login.service';
+import { MatSnackBar } from '@angular/material'
 
 
 
@@ -8,7 +9,7 @@ import { LoginService } from './login.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoginService]
+  providers: [LoginService, MatSnackBar]
   
 })
 export class LoginComponent implements OnInit {
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
   confirmNewPassword='';
   createAccountView=false;
   constructor(private LoginStoreService: LoginStoreService,
-              private LoginService: LoginService)
+              private LoginService: LoginService,
+              private SnackBar: MatSnackBar)
+              
                { }
     
   ngOnInit() {
@@ -32,6 +35,7 @@ export class LoginComponent implements OnInit {
       this.LoginStoreService.login(data, this.password)
     },error=> {
       console.log("error")
+      this.SnackBar.open("Login failed. Check your credentials", "Okay", {duration: 3000, panelClass: "failed"})
     })
     // this.LoginStoreService.login(this.username,this.password)
   }

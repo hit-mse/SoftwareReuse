@@ -7,7 +7,14 @@ import { MainComponent } from './main/main.component';
 import { LoginStoreService } from './login-store.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule} from '@angular/material';
+import { 
+  MatToolbarModule, 
+  MatButtonModule, 
+  MatCardModule, 
+  MatFormFieldModule, 
+  MatInputModule, 
+  MatRadioModule,
+  MatSnackBarModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { StockviewComponent } from './stockview/stockview.component';
 import { PortfolioComponent } from './portfolio/portfolio.component'
@@ -34,7 +41,8 @@ import { PortfolioComponent } from './portfolio/portfolio.component'
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule
   ],
   providers: [LoginStoreService],
   bootstrap: [AppComponent, LoginComponent]

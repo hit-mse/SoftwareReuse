@@ -13,3 +13,15 @@ span, h4, h1, h2, h3, button, mat-card-title {
     font-weight: 200;
 }
 
+
+.successful {
+    color: lightgreen !important; 
+    font-size: 2em !important;
+}
+
+.failed {
+    color: lightcoral !important; 
+    font-size: 2em !important;
+}
+
+

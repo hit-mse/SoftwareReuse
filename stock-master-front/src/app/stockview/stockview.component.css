@@ -43,3 +43,20 @@
     width: 60%;
     align-content: left;
   }
+
+  .successful .mat-simple-snackbar-action {
+    color: green;
+    background: green;
+    font-size: 1em;
+  }
+
+  .mat-snack-bar-container .successful{
+    color: green;
+    background: green;
+    font-size: 1em;
+  }
+
+  .failed {
+    color: red !important;
+    font-size: 1em;
+  }

@@ -16,9 +16,7 @@ export class StockviewService {
   }
 
   buyStock(stockname, shares, username, password):Observable<any>  {
-    let body = {stockname, shares, username, password}
-    console.log("HAAAAJ");
-    
+    let body = {stockname, shares, username, password}    
     console.log(body);
     
     return this.http.post('http://localhost:8081/buy',body)

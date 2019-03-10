@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { StockviewService } from './stockview.service';
 import { Chart } from 'chart.js';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { LoginStoreService } from '../login-store.service';
 import { LoginService } from '../login/login.service';
+import {MatSnackBar} from '@angular/material';
+
 
 
 @Component({
   selector: 'app-stockview',
   templateUrl: './stockview.component.html',
   styleUrls: ['./stockview.component.css'],
-  providers: [StockviewService, LoginService]
+  providers: [StockviewService, LoginService, MatSnackBar]
 })
 export class StockviewComponent implements OnInit {
   @ViewChild('lineChart') private chartRef;
@@ -24,39 +26,42 @@ export class StockviewComponent implements OnInit {
   currentPrice: any;
   numberOfShares: any;
 
-  constructor(private StockviewService: StockviewService, private LoginStoreService: LoginStoreService, private LoginService: LoginService) { }
+  constructor(private StockviewService: StockviewService, 
+              private LoginStoreService: LoginStoreService, 
+              private LoginService: LoginService,
+              private SnackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
 
   queryStock() {
-    console.log("blyat");
     var dataPrices=["1138.7704","1143.4800","1149.8400","1152.3250","1149.6000","1145.5250","1143.9900","1139.7500","1140.8300","1141.9900","1146.0000",
     "1145.2300"].reverse();
     var dataTimespans =["2019-03-08 10:00:00","2019-03-08 10:30:00","2019-03-08 11:00:00","2019-03-08 11:30:00","2019-03-08 12:00:00","2019-03-08 12:30:00","2019-03-08 13:00:00","2019-03-08 13:30:00","2019-03-08 14:00:00","2019-03-08 14:30:00","2019-03-08 15:00:00","2019-03-08 15:30:00"].reverse();
     var dummyData = {prices:dataPrices, timestamps:dataTimespans}
-    console.log(this.currentStock);
-    console.log(this.currentTimespan);
     if(!this.currentStock){
       return;
     }
 
     this.StockviewService.queryStock(this.currentStock, this.currentTimespan).subscribe(data => {
-      console.log(data);
       this.showGraph(data);
       this.createTrend(data);
       this.queriedStock = this.currentStock;
     },
       error => {
+        this.SnackBar.open("Request failed", "Okay", {duration: 3000, panelClass: "failed"})
         console.log(error);
-
       })
   }
   buyStock(){
       this.StockviewService.buyStock(this.queriedStock,this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
         this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe( user => {
           this.LoginStoreService.login(user, this.LoginStoreService.password);
+          this.SnackBar.open("Transaction sucessful", "Okay", {duration: 3000, panelClass: "successful"})
         })
+      },
+      err => {
+        this.SnackBar.open("Transaction failed", "Okay", {duration: 3000, panelClass: "failed"})
       })
   }
 
@@ -64,7 +69,11 @@ export class StockviewComponent implements OnInit {
     this.StockviewService.sellStock(this.queriedStock,this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
       this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe( user => {
         this.LoginStoreService.login(user, this.LoginStoreService.password);
+        this.SnackBar.open("Transaction sucessful", "Okay", {duration: 3000, panelClass: "successful"})
       })
+    },
+    err => {
+      this.SnackBar.open("Transaction failed", "Okay", {duration: 3000, panelClass: "failed"})
     })
   }
 
@@ -97,22 +106,20 @@ export class StockviewComponent implements OnInit {
     },
       error => {
         console.log(error);
-
+        this.SnackBar.open("Request failed", "Okay", {duration: 3000, panelClass: "failed"})
       })
   }
 
  
   showGraph(data) {
-    // console.log(data.prices.toString());
-    // console.log(data.timestamps.toString());
     
     this.chart = new Chart(this.chartRef.nativeElement, {
       type: 'line',
       data: {
-        labels: data.timestamps.reverse(), // your labels array
+        labels: data.timestamps.reverse(),
         datasets: [
           {
-            data: data.prices.reverse(), // your data array
+            data: data.prices.reverse(),
             borderColor: '#00AEFF',
             fill: false
           }
