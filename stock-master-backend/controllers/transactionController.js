@@ -10,7 +10,7 @@ exports.get = function(req, res) {
 };
 
 // const req.body = {
-//   USERNAME: "",
+//   username: "",
 //   password: "",
 //   stockname: "",
 //   shares: "",
