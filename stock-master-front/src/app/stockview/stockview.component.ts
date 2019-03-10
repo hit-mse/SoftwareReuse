@@ -34,8 +34,9 @@ export class StockviewComponent implements OnInit {
     var dummyData = {prices:dataPrices, timestamps:dataTimespans}
     console.log(this.currentStock);
     console.log(this.currentTimespan);
-    
-
+    if(!this.currentStock){
+      return;
+    }
 
     this.StockviewService.queryStock(this.currentStock, this.currentTimespan).subscribe(data => {
       console.log(data);
@@ -69,7 +70,20 @@ export class StockviewComponent implements OnInit {
     }
     this.currentTrend = trendString + Number(trend).toFixed(2);
   }
+  updateCurrentStock() {
+    if(!this.queriedStock){
+      return;
+    }
+    this.StockviewService.queryStock(this.queriedStock, this.currentTimespan).subscribe(data => {
+      this.showGraph(data);
+    },
+      error => {
+        console.log(error);
 
+      })
+  }
+
+ 
   showGraph(data) {
     // console.log(data.prices.toString());
     // console.log(data.timestamps.toString());
