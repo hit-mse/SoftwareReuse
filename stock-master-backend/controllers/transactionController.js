@@ -9,19 +9,19 @@ exports.get = function(req, res) {
   res.json("transaction endpoint");
 };
 
-const test = {
-  USERNAME: "",
-  password: "",
-  stockname: "",
-  shares: "",
-}
+// const req.body = {
+//   USERNAME: "",
+//   password: "",
+//   stockname: "",
+//   shares: "",
+// }
 
-const testuser = {
-  username: 'testuser',
-  password: 'test',
-  money: 500,
-  stocks: { 'GOOGL': 5 }
-}
+// const userObject = {
+//   username: 'testuser',
+//   password: 'test',
+//   money: 500,
+//   stocks: { 'GOOGL': 5 }
+// }
 
 
 
@@ -37,7 +37,8 @@ exports.buy = function(req, res) {
          const price = promises[1] * req.body.shares;
          
          if(user.money < price) {
-           res.status(401).res(false);
+           console.log(`User ${req.body.username} can't afford ${req.body.shares} shares`);
+           res.status(401).send(false);
            return;
           }
           const balace = user.money - price;
@@ -45,10 +46,10 @@ exports.buy = function(req, res) {
           user.money = balace;
           if (!user.stocks[req.body.stockname]) user.stocks[req.body.stockname] = 0;
 
-
           user.stocks[req.body.stockname] = user.stocks[req.body.stockname] + req.body.shares;
-          User.findOneAndUpdate({username: req.body.username}, { $set: user }).then(res => {
-            console.log('Buy complete');
+          User.findOneAndUpdate({username: req.body.username}, { $set: user }).then(user => {
+            console.log(`${req.body.username} successfully bought ${req.body.shares} of ${req.body.stockname} for ${price}`);
+            res.status(200).send(true);
           });
 
        });
@@ -59,14 +60,51 @@ exports.buy = function(req, res) {
 };
 
 exports.sell = function(req, res) {
-    var new_task = new User(req.body);
-  
-      //TODO stuff
-  
-    new_task.save(function(err, task) {
-      if (err)
-        res.send(err);
-      res.json(task);
+    authenticate(req.body.username, req.body.password).then((authenticated) => {
+      if (!authenticated){
+        res.status(401).send(authenticated);
+        return;
+      }
+
+      const promise1 = User.findOne({username: req.body.username});
+      const promise2 = getPrice(req.body.stockname);
+
+      Promise.all([promise1, promise2]).then((promises) => {
+        const user = promises[0];
+        const reqStockPrice = promises[1] * req.body.shares;
+
+        if (user.money < reqStockPrice){
+          res.status(401).send(false);
+          return;
+        }
+
+        if (user.stocks[req.body.stockname] - req.body.shares < 0 ){
+          console.log('Cant sell more stocks than you own');
+          res.status(401).send(false);
+          return;
+        }
+
+        const sharesLeft = user.stocks[req.body.stockname] - req.body.shares;
+
+        user.stocks[req.body.stockname] = sharesLeft;
+        user.money = user.money + reqStockPrice;
+
+        // if (sharesLeft === 0){
+        //   delete user.stocks[req.body.stockname];
+        //   console.log('user.stocks: ', user.stocks);
+        //   if (user.stocks){
+        //     console.log('updated');
+        //     user.stocks = {};
+        //   }
+        // }
+
+        User.findOneAndUpdate({username: req.body.username}, { $set: user }).then((user) => {
+          console.log(`${req.body.username} successfully sold ${req.body.shares} of ${req.body.stockname} for ${reqStockPrice}`);
+          res.status(200).send(true);
+        });
+
+      });
+
     });
   };
   
