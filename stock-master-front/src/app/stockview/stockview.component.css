@@ -7,26 +7,39 @@
   .example-full-width {
     width: 70%;
   }
+  .current-stock {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 
 
-.example-radio-group {
+  .example-radio-group {
     display: inline-flex;
     flex-direction: row;
+    padding: 1em;
   }
   
   .example-radio-button {
-    margin: 5px;
-    
+    margin: 5px;    
   }
   
   .example-selected-value {
     margin: 15px 0;
   }
   
+  .mat-radio-button {
+    margin: 10px;
+  }
   .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
     background-color: #1fb5bf !important;
-}
+    margin: 10px;
+  }
 
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #1fb5bf !important;
-}
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+      border-color: #1fb5bf !important;
+  }
+
+  .chart {
+    max-width: 900px;
+    align-content: center;
+  }

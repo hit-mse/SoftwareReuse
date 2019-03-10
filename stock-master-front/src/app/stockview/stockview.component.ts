@@ -14,6 +14,7 @@ export class StockviewComponent implements OnInit {
 
   currentStock: string = "";
   currentTimespan: string = 'day';
+  queriedStock: string = "";
   timespans: string[] = ['day', 'week', 'month', 'year'];
   chart: any;
 
@@ -32,6 +33,7 @@ export class StockviewComponent implements OnInit {
     this.StockviewService.queryStock(this.currentStock, this.currentTimespan).subscribe(data => {
       console.log(data);
       this.showGraph(data);
+      this.queriedStock = this.currentStock;
     },
       error => {
         console.log(error);

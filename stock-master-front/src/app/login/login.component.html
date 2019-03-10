@@ -1,22 +1,36 @@
 <div *ngIf="!createAccountView" class="log-form">
-    <h1>Stöck Mäster</h1>
-    <h2>Login to your account</h2>
-    <div class="formwrap" >
-      <input type="text" [(ngModel)]="username" title="username" placeholder="username" />
-      <input type="password"[(ngModel)]="password"  title="password" placeholder="password" />
-      <button type="submit" (click)="doLogin()" class="btn">Login</button>
-      <button type="submit" (click)="changeView()" class="btn">Create Account</button>
+  <h1>Stöck Mäster</h1>
+  <h2>Login to your account</h2>
+  <div class="formwrap">
+    <mat-form-field style="width:70%;">
+      <input matInput type="text" [(ngModel)]="username" title="username" placeholder="username" />
+    </mat-form-field>
+    <mat-form-field style="width:70%;">
+      <input matInput type="password" [(ngModel)]="password" title="password" placeholder="password" />
+    </mat-form-field>
+    <div>
+      <button mat-button type="submit" (click)="doLogin()" class="btn">Login</button>
+      <button mat-button type="submit" (click)="changeView()" class="btn">Create Account</button>
     </div>
-  </div><!--end log form -->
-  <div *ngIf="createAccountView" class="log-form">
-      <h1>Stöck Mäster</h1>
-      <h2>Create account</h2>
-      <div class="formwrap" >
-        <input type="text" [(ngModel)]="newAccountUsername" title="username" placeholder="username" />
-        <input type="password"[(ngModel)]="newAccountPassword"  title="password" placeholder="password" />
-        <input type="password"[(ngModel)]="confirmNewPassword"  title="confirm password" placeholder="confirm password" />
-        <button type="submit" (click)="createAccount()" class="btn">Create Account</button>
-        <button type="submit" (click)="changeView()" class="btn">Already have an account? Sign in</button>
-      </div>
-    </div><!--end log form -->
-    
+  </div>
+</div>
+<!--end log form -->
+<div *ngIf="createAccountView" class="log-form">
+  <h1>Stöck Mäster</h1>
+  <h2>Create account</h2>
+  <div class="formwrap">
+    <mat-form-field style="width:70%;">
+      <input matInput type="text" [(ngModel)]="newAccountUsername" title="username" placeholder="username" />
+    </mat-form-field>
+    <mat-form-field style="width:70%;">
+      <input matInput type="password" [(ngModel)]="newAccountPassword" title="password" placeholder="password" />
+    </mat-form-field>
+    <mat-form-field style="width:70%;">
+      <input matInput type="password" [(ngModel)]="confirmNewPassword" title="confirm password" placeholder="confirm password" />
+    </mat-form-field>
+
+    <button mat-button type="submit" (click)="createAccount()" class="btn">Create Account</button>
+    <button mat-button type="submit" (click)="changeView()" class="btn">Already have an account? Sign in</button>
+  </div>
+</div>
+<!--end log form -->

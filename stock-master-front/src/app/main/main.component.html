@@ -2,17 +2,16 @@
   <mat-toolbar-row>
     <span>Stöck Mäster</span>
     <span class="spacer"></span>
-    <div>
-      <button mat-raised-button (click)="LoginStoreService.logout()">Sign out</button>
+    <div style="display:flex; flex-direction:row;">
+      <h4>Signed in as: {{LoginStoreService.user.username}}</h4>
+      <button mat-flat-button style="margin-left: 20px" (click)="LoginStoreService.logout()">Sign out</button>
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row>
       <span class="spacer"></span>
-      <div>
-        <h4>Signed in as: {{LoginStoreService.user.username}}</h4>
-      </div>
+
       <div style="margin-left: 20px">
-          <h4>Account balance: {{LoginStoreService.user.money}}</h4>
+          <h4>Account balance: ${{LoginStoreService.user.money}}</h4>
       </div>
   </mat-toolbar-row>
 </mat-toolbar>

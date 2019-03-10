@@ -4,16 +4,12 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:400,300,600);
 
 
-body {
-    color: lighten(#2a2a2a, 20%);
-    font-family: 'open sans condensed';
-    font-size: 1.45em;
-    display: block;
-    width: 100%;
-    padding: .75em 1em .75em 1.5em;
+span, h4, h1, h2, h3, button, mat-card-title {
+    color: lighten(#2a2a2a, 20%) !important;
+    font-family: 'open sans' !important;
     box-shadow:inset 0px 1px 1px fadeout(white, 95%);
     border: 1px solid darken(#2a2a2a, 5%);
     text-shadow: 0px 1px 1px darken(#2a2a2a, 5%);
-    margin: 0;
     font-weight: 200;
 }
+

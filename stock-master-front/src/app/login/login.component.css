@@ -31,7 +31,11 @@ transform: translate(-50%,-50%);
   .formwrap {
     display: block;
     width: 100%;
-    padding: 2em;
+    padding: 1em;
+    margin: 1em;
+  }
+  input {
+    margin: 0.1em;
   }
   
   h1 {
@@ -66,19 +70,7 @@ transform: translate(-50%,-50%);
     margin: 0;
     font-weight: 200;
   }
-  
-  input {
-    display: block;
-    margin: auto auto;
-    width: 100%;
-    margin-bottom: 2em;
-    padding: .5em 0;
-    border: none;
-    border-bottom: 1px solid #eaeaea;
-    padding-bottom: 1.25em;
-    color: #757575;
-  }
-  
+
   .btn {
     display: inline-block;
     background: #1fb5bf;
