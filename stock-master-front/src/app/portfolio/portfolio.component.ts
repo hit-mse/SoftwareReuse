@@ -12,6 +12,10 @@ export class PortfolioComponent implements OnInit {
 
   constructor(private LoginStoreService: LoginStoreService) { 
     this.userstocks = _.keys(this.LoginStoreService.user.stocks)
+    this.LoginStoreService.isUserLoggedIn.subscribe(isLoggedIn => {
+      this.userstocks = _.keys(this.LoginStoreService.user.stocks)
+
+    })
   }
 
   ngOnInit() {

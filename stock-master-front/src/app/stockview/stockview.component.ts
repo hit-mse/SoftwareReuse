@@ -2,13 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { StockviewService } from './stockview.service';
 import { Chart } from 'chart.js';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { LoginStoreService } from '../login-store.service';
+import { LoginService } from '../login/login.service';
 
 
 @Component({
   selector: 'app-stockview',
   templateUrl: './stockview.component.html',
   styleUrls: ['./stockview.component.css'],
-  providers: [StockviewService]
+  providers: [StockviewService, LoginService]
 })
 export class StockviewComponent implements OnInit {
   @ViewChild('lineChart') private chartRef;
@@ -20,8 +22,9 @@ export class StockviewComponent implements OnInit {
   chart: any;
   trendStyle={};
   currentPrice: any;
+  numberOfShares: any;
 
-  constructor(private StockviewService: StockviewService) { }
+  constructor(private StockviewService: StockviewService, private LoginStoreService: LoginStoreService, private LoginService: LoginService) { }
 
   ngOnInit() {
   }
@@ -48,6 +51,17 @@ export class StockviewComponent implements OnInit {
         console.log(error);
 
       })
+  }
+  buyStock(){
+      this.StockviewService.buyStock(this.queriedStock,this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
+        this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe( user => {
+          this.LoginStoreService.login(user, this.LoginStoreService.password);
+        })
+      })
+  }
+
+  sellStock(){
+
   }
 
   createTrend(data){

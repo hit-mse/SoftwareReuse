@@ -7,20 +7,21 @@ export class LoginStoreService {
   public isUserLoggedIn:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   user = {
     username: "",
-    password: "",
     money: 0,
     stocks: {}
   };
+  password = "";
+
   
 
   constructor() { 
     this.isUserLoggedIn
   }
 
-  login(user)  {
+  login(user, password)  {
     console.log("User logged in:");
     this.user.username = user.username;
-    this.user.password = user.password;
+    this.password = password;
     this.user.money = user.money;
     this.user.stocks = user.stocks;
     console.log(this.user);
@@ -30,10 +31,11 @@ export class LoginStoreService {
   logout(){
     this.user = {
       username: "",
-      password: "",
       money: 0,
       stocks: {}
     };
+    this.password = "";
+
     this.isUserLoggedIn.next(false);
   }
 }
