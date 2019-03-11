@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { LoginStoreService } from '../login-store.service';
 import { LoginService } from '../login/login.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -22,104 +22,25 @@ export class StockviewComponent implements OnInit {
   queriedStock: string = "";
   timespans: string[] = ['day', 'week', 'month', 'year'];
   chart: any;
-  trendStyle={};
+  trendStyle = {};
   currentPrice: any;
   numberOfShares: any;
 
-  constructor(private StockviewService: StockviewService, 
-              private LoginStoreService: LoginStoreService, 
-              private LoginService: LoginService,
-              private SnackBar: MatSnackBar) { }
+  constructor(private StockviewService: StockviewService,
+    private LoginStoreService: LoginStoreService,
+    private LoginService: LoginService,
+    private SnackBar: MatSnackBar) {
+
+  }
 
   ngOnInit() {
-  }
-
-  queryStock() {
-    var dataPrices=["1138.7704","1143.4800","1149.8400","1152.3250","1149.6000","1145.5250","1143.9900","1139.7500","1140.8300","1141.9900","1146.0000",
-    "1145.2300"].reverse();
-    var dataTimespans =["2019-03-08 10:00:00","2019-03-08 10:30:00","2019-03-08 11:00:00","2019-03-08 11:30:00","2019-03-08 12:00:00","2019-03-08 12:30:00","2019-03-08 13:00:00","2019-03-08 13:30:00","2019-03-08 14:00:00","2019-03-08 14:30:00","2019-03-08 15:00:00","2019-03-08 15:30:00"].reverse();
-    var dummyData = {prices:dataPrices, timestamps:dataTimespans}
-    if(!this.currentStock){
-      return;
-    }
-
-    this.StockviewService.queryStock(this.currentStock, this.currentTimespan).subscribe(data => {
-      this.showGraph(data);
-      this.createTrend(data);
-      this.queriedStock = this.currentStock;
-    },
-      error => {
-        this.SnackBar.open("Request failed", "Okay", {duration: 3000, panelClass: "failed"})
-        console.log(error);
-      })
-  }
-  buyStock(){
-      this.StockviewService.buyStock(this.queriedStock,this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
-        this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe( user => {
-          this.LoginStoreService.login(user, this.LoginStoreService.password);
-          this.SnackBar.open("Transaction sucessful", "Okay", {duration: 3000, panelClass: "successful"})
-        })
-      },
-      err => {
-        this.SnackBar.open("Transaction failed", "Okay", {duration: 3000, panelClass: "failed"})
-      })
-  }
-
-  sellStock(){
-    this.StockviewService.sellStock(this.queriedStock,this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
-      this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe( user => {
-        this.LoginStoreService.login(user, this.LoginStoreService.password);
-        this.SnackBar.open("Transaction sucessful", "Okay", {duration: 3000, panelClass: "successful"})
-      })
-    },
-    err => {
-      this.SnackBar.open("Transaction failed", "Okay", {duration: 3000, panelClass: "failed"})
-    })
-  }
-
-  createTrend(data){
-    var dataPoints = data.prices.length;
-    var currentStockPrice = data.prices[dataPoints-1];
-    
-    var openingStockPrice = data.prices[0];
-    var trend = (currentStockPrice/openingStockPrice)*100;
-    this.currentPrice=currentStockPrice;
-    
-    var trendString="";
-    if(trend < 100){
-      trend=100-trend;
-      trendString="-";
-      this.trendStyle = {'color':'red', 'margin-bottom':'20px'}
-    }else{
-      trend=trend-100;
-      trendString="+";
-      this.trendStyle = {'color':'green','margin-bottom':'20px'}
-    }
-    this.currentTrend = trendString + Number(trend).toFixed(2);
-  }
-  updateCurrentStock() {
-    if(!this.queriedStock){
-      return;
-    }
-    this.StockviewService.queryStock(this.queriedStock, this.currentTimespan).subscribe(data => {
-      this.showGraph(data);
-    },
-      error => {
-        console.log(error);
-        this.SnackBar.open("Request failed", "Okay", {duration: 3000, panelClass: "failed"})
-      })
-  }
-
- 
-  showGraph(data) {
-    
     this.chart = new Chart(this.chartRef.nativeElement, {
       type: 'line',
       data: {
-        labels: data.timestamps.reverse(),
+        labels: [],
         datasets: [
           {
-            data: data.prices.reverse(),
+            data: [],
             borderColor: '#00AEFF',
             fill: false
           }
@@ -139,8 +60,91 @@ export class StockviewComponent implements OnInit {
         }
       }
     });
+  }
+
+  queryStock() {
 
 
+    if (!this.currentStock) {
+      return;
+    }
+
+    this.StockviewService.queryStock(this.currentStock, this.currentTimespan).subscribe(data => {
+      this.showGraph(data);
+      this.createTrend(data);
+      this.queriedStock = this.currentStock;
+    },
+      error => {
+        this.SnackBar.open("Request failed", "Okay", { duration: 3000, panelClass: "failed" })
+        console.log(error);
+      })
+  }
+  buyStock() {
+    this.StockviewService.buyStock(this.queriedStock, this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
+      this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(user => {
+        this.LoginStoreService.login(user, this.LoginStoreService.password);
+        this.SnackBar.open("Transaction sucessful", "Okay", { duration: 3000, panelClass: "successful" })
+      })
+    },
+      err => {
+        this.SnackBar.open("Transaction failed", "Okay", { duration: 3000, panelClass: "failed" })
+      })
+  }
+
+  sellStock() {
+    this.StockviewService.sellStock(this.queriedStock, this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
+      this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(user => {
+        this.LoginStoreService.login(user, this.LoginStoreService.password);
+        this.SnackBar.open("Transaction sucessful", "Okay", { duration: 3000, panelClass: "successful" })
+      })
+    },
+      err => {
+        this.SnackBar.open("Transaction failed", "Okay", { duration: 3000, panelClass: "failed" })
+      })
+  }
+
+  createTrend(data) {
+    var dataPoints = data.prices.length;
+    var currentStockPrice = data.prices[dataPoints - 1];
+
+    var openingStockPrice = data.prices[0];
+    var trend = (currentStockPrice / openingStockPrice) * 100;
+    this.currentPrice = currentStockPrice;
+
+    var trendString = "";
+    if (trend < 100) {
+      trend = 100 - trend;
+      trendString = "-";
+      this.trendStyle = { 'color': 'red', 'margin-bottom': '20px' }
+    } else {
+      trend = trend - 100;
+      trendString = "+";
+      this.trendStyle = { 'color': 'green', 'margin-bottom': '20px' }
+    }
+    this.currentTrend = trendString + Number(trend).toFixed(2);
+  }
+  updateCurrentStock() {
+    if (!this.queriedStock) {
+      return;
+    }
+    this.StockviewService.queryStock(this.queriedStock, this.currentTimespan).subscribe(data => {
+      this.showGraph(data);
+    },
+      error => {
+        console.log(error);
+        this.SnackBar.open("Request failed", "Okay", { duration: 3000, panelClass: "failed" })
+      })
+  }
+
+
+  showGraph(data) {
+    
+    this.chart.data.labels = data.timestamps.reverse();
+    console.log(this.chart.data.datasets);
+    this.chart.data.datasets.forEach( (dataset) => {
+      dataset.data = data.prices.reverse();
+    });
+    this.chart.update();
   }
 
 }
