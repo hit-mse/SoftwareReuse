@@ -13,6 +13,15 @@
 2. Run "npm start" in root directory to start the application.
 3. Open http://localhost:4200 in your browser. (Recommended to use Chrome.)
 
+### Note:
+Currently the create user functionallity is not added. In order to log in use one of the following accounts:
+
+Username: testuser
+Password: test
+
+Username: oscar
+Password: test
+
 ## How to use?
 1. Provide your credentials and sign in.
 2. Search for a stock e.g GOOGL
