@@ -9,7 +9,7 @@
 1. run "npm install" from the root directory. // installs all the dependencies
 
 ## Start
-1. Start mongoDB.
+1. Start mongoDB with "mongod"
 2. Run "npm start" in root directory to start the application.
 3. Open http://localhost:4200 in your browser. (Recommended to use Chrome.)
 
