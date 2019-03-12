@@ -131,13 +131,15 @@ export class StockviewComponent implements OnInit {
     }
     this.currentTrend = trendString + Number(trend).toFixed(2);
   }
-  updateCurrentStock() {
+  updateCurrentStock(event) {
+    
+
     if (!this.queriedStock) {
       return;
     }
-    this.isLoading = true;
-    this.StockviewService.queryStock(this.queriedStock, this.currentTimespan).subscribe(data => {
+    this.StockviewService.queryStock(this.queriedStock, event.value).subscribe(data => {
       this.showGraph(data);
+      this.createTrend(data);
       this.isLoading = false;
     },
       error => {
@@ -145,6 +147,7 @@ export class StockviewComponent implements OnInit {
         console.log(error);
         this.SnackBar.open("Request failed", "Okay", { duration: 3000, panelClass: "failed" })
       })
+   
   }
 
 
