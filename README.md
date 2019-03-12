@@ -3,9 +3,10 @@
 ## Requirements
 * MongoDB 
 * NPM
+* Node.js
 
 ## Installation 
-1. run "npm install" from the root directory.
+1. run "npm install" from the root directory. // installs all the dependencies
 
 ## Start
 1. Start mongoDB.
@@ -19,9 +20,6 @@
 4. Input the amount of stocks you want to buy and click buy.
 5. Check portfolio for the amount of stocks you own.
 6. Search for the stock you want to sell, enter the amount and click sell.
-
-## Code Example
-
 
 ## API Reference
 Alpha vantage stock API documentation: https://www.alphavantage.co/documentation/
