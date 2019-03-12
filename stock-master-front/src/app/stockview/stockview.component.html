@@ -1,9 +1,20 @@
 <div>
+  <div *ngIf="isLoading" class="loading-view-container">
+    <mat-progress-spinner class="loading-view" mode="indeterminate"></mat-progress-spinner>
+  </div>
   <div>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Input stock:" value="" [(ngModel)]="currentStock">
-    </mat-form-field>
-    <button mat-flat-button (click)="queryStock()" style="margin:6px; background: #1fb5bf; color: white;">search</button>
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Input stock:" value="" [(ngModel)]="currentStock">
+      </mat-form-field>
+      <button mat-flat-button (click)="queryStock()" style="margin:6px; background: #1fb5bf; color: white;">search</button>
+    </div>
+    <mat-radio-group class="example-radio-group" [(ngModel)]="currentTimespan">
+      <mat-radio-button (click)="updateCurrentStock()" class="esxample-radio-button" *ngFor="let timespan of timespans"
+        [value]="timespan">
+        {{timespan}}
+      </mat-radio-button>
+    </mat-radio-group>
   </div>
   <mat-radio-group class="example-radio-group" [(ngModel)]="currentTimespan">
     <mat-radio-button (change)="updateCurrentStock($event)" class="esxample-radio-button" *ngFor="let timespan of timespans" [value]="timespan">
@@ -11,24 +22,23 @@
     </mat-radio-button>
   </mat-radio-group>
 
-</div>
-
-<div style="display:flex;  flex-direction:row; flex-wrap: wrap; width:100%; height: 100%; align-items:left; justify-content:left;">
-  <div class="chart" >
+  <div style="display:flex;  flex-direction:row; flex-wrap: wrap; width:100%; height: 100%; align-items:left; justify-content:left;">
+    <div class="chart">
       <h2 class="current-stock" style="display:block; padding-left: 10%;">Showing stock: {{queriedStock}}</h2>
-      <canvas #lineChart >{{ chart }}</canvas>
-  </div>
-  <div style=" width: 27%; padding: 20px"  >
-    <h2>{{currentPrice}}</h2>
-    <div class="trend" [ngStyle]="trendStyle">
-      {{currentTrend}}
+      <canvas #lineChart>{{ chart }}</canvas>
     </div>
-    <div>
-          <mat-form-field >
-            <input matInput placeholder="Stock" value="0" [(ngModel)]="numberOfShares" input type="number">
-          </mat-form-field>
-      <button mat-raised-button (click)="buyStock()" style="margin:10px;">Buy</button>
-      <button mat-raised-button (click)="sellStock()" >Sell</button>
+    <div style=" width: 27%; padding: 20px">
+      <h2>{{currentPrice}}</h2>
+      <div class="trend" [ngStyle]="trendStyle">
+        {{currentTrend}}
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Stock" value="0" [(ngModel)]="numberOfShares" input type="number">
+        </mat-form-field>
+        <button mat-raised-button (click)="buyStock()" style="margin:10px;">Buy</button>
+        <button mat-raised-button (click)="sellStock()">Sell</button>
+      </div>
     </div>
   </div>
 </div>

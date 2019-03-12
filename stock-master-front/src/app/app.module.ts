@@ -14,7 +14,8 @@ import {
   MatFormFieldModule, 
   MatInputModule, 
   MatRadioModule,
-  MatSnackBarModule} from '@angular/material';
+  MatSnackBarModule,
+  MatProgressSpinnerModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { StockviewComponent } from './stockview/stockview.component';
 import { PortfolioComponent } from './portfolio/portfolio.component'
@@ -29,7 +30,6 @@ import { PortfolioComponent } from './portfolio/portfolio.component'
     MainComponent,
     StockviewComponent,
     PortfolioComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,8 @@ import { PortfolioComponent } from './portfolio/portfolio.component'
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [LoginStoreService],
   bootstrap: [AppComponent, LoginComponent]
