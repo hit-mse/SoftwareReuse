@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { StockviewService } from './stockview.service';
 import { Chart } from 'chart.js';
-import { MAT_DIALOG_DATA } from '@angular/material';
 import { LoginStoreService } from '../login-store.service';
 import { LoginService } from '../login/login.service';
 import { MatSnackBar } from '@angular/material';
@@ -25,6 +24,7 @@ export class StockviewComponent implements OnInit {
   trendStyle = {};
   currentPrice: any;
   numberOfShares: any;
+  isLoading: boolean = false;
 
   constructor(private StockviewService: StockviewService,
     private LoginStoreService: LoginStoreService,
@@ -68,37 +68,45 @@ export class StockviewComponent implements OnInit {
     if (!this.currentStock) {
       return;
     }
-
+    this.isLoading = true;
     this.StockviewService.queryStock(this.currentStock, this.currentTimespan).subscribe(data => {
       this.showGraph(data);
       this.createTrend(data);
       this.queriedStock = this.currentStock;
+      this.isLoading = false;
     },
       error => {
+        this.isLoading = false;
         this.SnackBar.open("Request failed", "Okay", { duration: 3000, panelClass: "failed" })
         console.log(error);
       })
   }
   buyStock() {
+    this.isLoading = true;
     this.StockviewService.buyStock(this.queriedStock, this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
       this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(user => {
         this.LoginStoreService.login(user, this.LoginStoreService.password);
+        this.isLoading = false;
         this.SnackBar.open("Transaction sucessful", "Okay", { duration: 3000, panelClass: "successful" })
       })
     },
       err => {
+        this.isLoading = false;
         this.SnackBar.open("Transaction failed", "Okay", { duration: 3000, panelClass: "failed" })
       })
   }
 
   sellStock() {
+    this.isLoading = true;
     this.StockviewService.sellStock(this.queriedStock, this.numberOfShares, this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(res => {
       this.LoginService.login(this.LoginStoreService.user.username, this.LoginStoreService.password).subscribe(user => {
         this.LoginStoreService.login(user, this.LoginStoreService.password);
         this.SnackBar.open("Transaction sucessful", "Okay", { duration: 3000, panelClass: "successful" })
+        this.isLoading = false;
       })
     },
       err => {
+        this.isLoading = false;
         this.SnackBar.open("Transaction failed", "Okay", { duration: 3000, panelClass: "failed" })
       })
   }
@@ -127,10 +135,13 @@ export class StockviewComponent implements OnInit {
     if (!this.queriedStock) {
       return;
     }
+    this.isLoading = true;
     this.StockviewService.queryStock(this.queriedStock, this.currentTimespan).subscribe(data => {
       this.showGraph(data);
+      this.isLoading = false;
     },
       error => {
+        this.isLoading = false;
         console.log(error);
         this.SnackBar.open("Request failed", "Okay", { duration: 3000, panelClass: "failed" })
       })
@@ -140,7 +151,6 @@ export class StockviewComponent implements OnInit {
   showGraph(data) {
     
     this.chart.data.labels = data.timestamps.reverse();
-    console.log(this.chart.data.datasets);
     this.chart.data.datasets.forEach( (dataset) => {
       dataset.data = data.prices.reverse();
     });
