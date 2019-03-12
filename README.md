@@ -1,5 +1,4 @@
 # SoftwareReuse - Stöck Mäster
-Stöck Mäster is a prototype application developed for the course Software Reuse at HIT. The application allows users to query stocks and visualize the price data. It also contains a mock stockportfolio as well as a mock sell/buy system. 
 
 ## Requirements
 * MongoDB 
@@ -15,13 +14,13 @@ Stöck Mäster is a prototype application developed for the course Software Reus
 3. Open http://localhost:4200 in your browser. (Recommended to use Chrome.)
 
 ### Note:
-Currently the create user functionallity is not added. In order to log in use one of the following accounts:
+Currently the create user functionallity is not added. In order to log in use one of the following accounts: <br />
 
-Username: testuser
-Password: test
+Username: testuser <br />
+Password: test <br />
 
-Username: oscar
-Password: test
+Username: oscar <br />
+Password: test <br />
 
 ## How to use?
 1. Provide your credentials and sign in.
