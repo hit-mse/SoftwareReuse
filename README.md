@@ -28,7 +28,7 @@ Alpha vantage stock API documentation: https://www.alphavantage.co/documentation
 1. Angular: https://angular.io/docs
 2. Node.js: https://nodejs.org/en/docs/
 3. npm: https://docs.npmjs.com/
-
+4. MongoDB: https://docs.mongodb.com/
 
 
 ### Authors
