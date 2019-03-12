@@ -43,3 +43,4 @@ Alpha vantage stock API documentation: https://www.alphavantage.co/documentation
 ### Authors
 
 Created by Oscar Andell, Axel Löjdquist, Jesper Holmström, Gustav Aaro and Antoine Feracci
+
