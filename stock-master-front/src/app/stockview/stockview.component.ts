@@ -132,11 +132,11 @@ export class StockviewComponent implements OnInit {
     this.currentTrend = trendString + Number(trend).toFixed(2);
   }
   updateCurrentStock(event) {
-    
-
     if (!this.queriedStock) {
       return;
     }
+    this.isLoading = true;
+    
     this.StockviewService.queryStock(this.queriedStock, event.value).subscribe(data => {
       this.showGraph(data);
       this.createTrend(data);
