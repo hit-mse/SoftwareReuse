@@ -4,6 +4,8 @@
 * MongoDB 
 * NPM
 * Node.js
+* Angular.js
+* Chart.js
 
 ## Installation 
 1. run "npm install" from the root directory. // installs all the dependencies
