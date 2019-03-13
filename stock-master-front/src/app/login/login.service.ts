@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LoginService {
+  [x: string]: any;
 
 
   constructor(private http: HttpClient) { 

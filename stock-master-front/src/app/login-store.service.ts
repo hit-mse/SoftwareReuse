@@ -22,9 +22,7 @@ export class LoginStoreService {
     this.user.username = user.username;
     this.password = password;
     this.user.money = user.money;
-    this.user.stocks = user.stocks;
-    console.log(this.user);
-    
+    this.user.stocks = user.stocks;    
     this.isUserLoggedIn.next(true);
   }
   logout(){
