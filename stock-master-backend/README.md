@@ -1,3 +1,14 @@
+# Stöckmästerbackedn
+
+## Dependedies
+* npm
+* MongoDB
+
+
+## Run
+1. Start MongoDb
+2. Run npm start
+
 ## Backend HTTP-Post endpoints
 
 ### /login
