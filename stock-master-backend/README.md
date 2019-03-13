@@ -1,6 +1,6 @@
-# Stöckmästerbackedn
+# Stöckmäster backend
 
-## Dependedies
+## Dependencies
 * npm
 * MongoDB
 
