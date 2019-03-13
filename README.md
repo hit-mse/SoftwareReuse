@@ -1,11 +1,12 @@
 # SoftwareReuse - Stöck Mäster
 
+## Purpose
+This web page has been made as part of the Software Reuse Class of HIT. Its purpose is to simulate a stock market app which allows the user to buy/sell stocks as will and to integrate a portfolio of stocks as well as a wallet. User can search for a specific stock and display its price up to a time period of a year prior and the trend over 24 hours.
+
 ## Requirements
 * MongoDB 
 * NPM
 * Node.js
-* Angular.js
-* Chart.js
 
 ## Installation 
 1. run "npm install" from the root directory. // installs all the dependencies
